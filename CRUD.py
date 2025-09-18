@@ -3,8 +3,21 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 import datetime
 Base = declarative_base()
 
-from test import User, Genre, Track, Edit, Reaction  
+from setup_db import User, Genre, Track, Edit, Reaction  
 
+
+
+
+def add_new_user(Session, tg_id, username):
+    session = Session()
+
+    user = User(
+        tg_id = tg_id,
+        username = username
+    )
+
+    session.add(user)
+    session.commit()
 
 
 

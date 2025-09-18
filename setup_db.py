@@ -28,6 +28,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
+    tg_id = Column(Integer)
     username = Column(String, nullable=False)
     created_at = Column(DateTime, default=datetime.datetime.utcnow)
 
@@ -116,33 +117,5 @@ if __name__ == "__main__":
 
     Session = sessionmaker(bind=engine)
     session = Session()
-
-    # Создадим данные
-    user1 = User(username="Лизок228")
-    user2 = User(username="Колька")
-    rap = Genre(genre_name="Реп")
-    jazz = Genre(genre_name="Джаз")
-
-    track = Track(
-        user=user1,
-        name="XXXL",
-        author="Монеточка",
-        add_at=datetime.date.today(),
-        genres=[rap, jazz]  # трек с несколькими жанрами
-    )
-
-    edit = Edit(
-        track=track,
-        user=user2,
-        author="5opka",
-        edit_at=datetime.date.today(),
-        genres=[rap]  # редактирование с жанром Rock
-    )
-
-    session.add_all([
-        user1, user2,
-        rap, jazz,
-        track, edit
-        ])
 
     session.commit()
