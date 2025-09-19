@@ -58,7 +58,7 @@ class Track(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
 
     edit_at = Column(Date)
-    add_at = Column(Date)
+    add_at = Column(DateTime, default=datetime.datetime.utcnow)
 
     name = Column(String)
     author = Column(String)
@@ -82,7 +82,8 @@ class Edit(Base):
     track_id = Column(Integer, ForeignKey("tracks.id"))
     user_id = Column(Integer, ForeignKey("users.id"))
 
-    edit_at = Column(Date)
+    edit_at = Column(DateTime, default=datetime.datetime.utcnow)
+    add_at = Column(Date)
 
     name = Column(String)
     author = Column(String)
@@ -105,6 +106,7 @@ class Reaction(Base):
     track_id = Column(Integer, ForeignKey("tracks.id"), primary_key=True)
     type = Column(Enum("like", "dislike", "blacklist", name="reaction_type"))
 
+    date = Column(DateTime, default=datetime.datetime.utcnow)
     user = relationship("User", back_populates="reactions")
     track = relationship("Track", back_populates="reactions")
 
@@ -119,3 +121,4 @@ if __name__ == "__main__":
     session = Session()
 
     session.commit()
+
