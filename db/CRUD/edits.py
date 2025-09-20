@@ -20,12 +20,7 @@ def add_new_edit(
     links=None,
     genres=None
     ):
-    """
-    Не принимает пустую строку
-    """
     
-
-
     edit = Edit(
         track = track,
         # user = user,

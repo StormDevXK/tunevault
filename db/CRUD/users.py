@@ -16,3 +16,12 @@ def add_new_user(Session, tg_id, username):
 
     session.add(user)
     session.commit()
+
+
+def create_user(session, username, tg_id=None):
+    user = User(username=username, tg_id=tg_id)
+
+    session.add(user)
+    session.commit()
+
+    return user
